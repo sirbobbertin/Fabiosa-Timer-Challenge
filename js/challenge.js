@@ -4,7 +4,6 @@ let timeInterval;
 let seconds = 0;
 let likeTimes=0;
 let newTextAmount = 0;
-//var textNode = document.createTextNode("");
 var listItem = document.createElement("li");
 
 let counterDisplay= document.getElementById("counter");
@@ -16,11 +15,17 @@ let submitButton = document.getElementById("submit");
 let timerVar = setInterval( startTimer,1000)
 
 
-//addEventListener("load", () => {window.setInterval( startTimer,1000)});
 document.getElementById("submit").addEventListener("click", () => {
 
+    event.preventDefault();
 
+    let getText = document.getElementById("comment-input").value;
+    let getChat = document.getElementById("list");
+    let textNode = document.createTextNode(getText);
+    let createDiv = document.createElement("div");
+    createDiv.appendChild(textNode);
 
+    getChat.appendChild(createDiv);
     
 })
 document.getElementById("plus").addEventListener("click", () => { document.getElementById("counter").innerHTML=seconds++;});
@@ -38,30 +43,20 @@ document.getElementById("heart").addEventListener("click", () =>
         newTextAmount++;
         let listItem = document.createElement("li"); 
         let textNode = document.createTextNode(currentNumber + " has been liked " + likeTimes);
-        textNode.nodeValue = currentNumber + " has been liked " + likeTimes;
+       // textNode.nodeValue = currentNumber + " has been liked " + likeTimes;
         listItem.appendChild(textNode);
         var ulElement = document.getElementById("likes");
         ulElement.appendChild(listItem);
      }
      
-})
+});
 
 document.getElementById("pause").addEventListener("click",() =>
 {
 
-    function toggleButtons(toggle)
-    {
-        plusButton.setAttribute("disabled",toggle);
-        minusButton.setAttribute("disabled",toggle);
-           heartButton.setAttribute("disabled",toggle);
-         submitButton.setAttribute("disabled",toggle);
-
-    }
-
     if(pauseLike.innerText==="pause")
-    {    window.clearInterval(timerVar);
-        //toggleButtons();
-        //plusButton.setAttribute("disabled",false);
+    {    
+        window.clearInterval(timerVar);
         plusButton.disabled = true;
         minusButton.disabled = true;
         heartButton.disabled = true;
@@ -70,7 +65,7 @@ document.getElementById("pause").addEventListener("click",() =>
     }
     else{
         timerVar = setInterval(startTimer,1000);
-        //toggleButtons(" ");
+
         pauseLike.innerText = "pause";
         plusButton.disabled = false;
         minusButton.disabled = false;
@@ -81,9 +76,7 @@ document.getElementById("pause").addEventListener("click",() =>
 
 
 })
-   function createText(){
-    
-   }
+
 
 
 function startTimer(){
